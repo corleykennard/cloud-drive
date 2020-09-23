@@ -30,7 +30,7 @@ const FileTable = () => {
         if(counter>10){
           alert(counter)
           }
-  });
+  }, [])
 
   return (
     <table className="table">
@@ -47,10 +47,8 @@ const FileTable = () => {
           <tr>
             <th scope="row">1</th>
             <td>
-              {" "}
               <Link
                 to={`${url}/${file.data.name}`}
-                className="list-group-item list-group-item-action row"
                 key={file.data.name}
               >
                 {file.data.name}
