@@ -41,7 +41,7 @@ let {url } = useRouteMatch();
   return (
     <div className="list-group container-fluid w-100">
     <a href="#" className="list-group-item row">
-      <input type="checkbox" className="col-2 form-control form-control-lg custom-control-input">
+      <input type="checkbox" className="col-2 form-control form-control-lg custom-control-input"></input>
       <h6 className="col-6">name</h6>
             <small className="col-2">size</small>
             <small className="col-2">time</small>
@@ -52,7 +52,7 @@ let {url } = useRouteMatch();
           className="list-group-item list-group-item-action row"
           key={file.data.name}
         >
-              <input type="checkbox" className="col-2 form-control form-control-lg custom-control-input">
+              <input type="checkbox" className="col-2 form-control form-control-lg custom-control-input"></input>
             <h6 class="col-6">{file.data.name}</h6>
             <small className="col-2">{file.data.size}</small>
             <small className="col-2">{file.ts}</small>
