@@ -374,13 +374,16 @@ const FileTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams();
   let { url } = useRouteMatch();
+const getData = async (parent) => {
+    return data;
+  };
 
   useEffect(() => {
     setIsLoading(true);
     if (parent == "/") {
       alert("/");
     }
-    this.getData(parent)
+   getData(parent)
       .then((data) => {
         setData(data);
         setIsLoading(false);
@@ -389,10 +392,7 @@ const FileTable = () => {
         setIsLoading(false);
       });
   });
-  this.getData = (parent) => {
-    return data;
-  };
-
+  
   return (
     <div className="list-group">
       {data.map((file) => (
