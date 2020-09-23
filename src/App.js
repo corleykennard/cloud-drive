@@ -464,12 +464,7 @@ class App extends Component {
               <Route exact strict path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/Music" component={LogIn} />
-              <Route
-                path="/parent/:path"
-                render={({ match }) => {
-                  return <FileTable parent={"/" + match.params.path} />;
-                }}
-              />
+              <Route path="/parent/:parent" component={FileTable}  />
               <Route component={Error} />
             </Switch>
           </div>
