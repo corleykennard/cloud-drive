@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Link,
   NavLink,
   Switch,
-  Redirect} from "react-router-dom";
+  Redirect,
+} from "react-router-dom";
 
-import {useRouteMatch, useParams } from "react-router";
+import { useRouteMatch, useParams } from "react-router";
 
 import faunadb from "faunadb";
 let q = faunadb.query;
@@ -368,33 +369,35 @@ const Contact = () => <h1>Contact</h1>;
 const Error = () => <h1> It is Not Found</h1>;
 const LogIn = () => <h1>Please login</h1>;
 
-function FileTable() {
-  this.state = {
-    data: [],
-    isLoading: false,
-  };
+const FileTable = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams();
   let { url } = useRouteMatch();
 
-  this.componentDidMount = function () {
-    this.setState({ isLoading: true });
-    if (this.props.parent == "/") {
+  useEffect(() => {
+    setIsLoading(true);
+    if (parent == "/") {
       alert("/");
     }
-
-    this.getData(this.props.parent)
-      .then((data) => this.setState({ data: data, isLoading: false }))
-      .catch((error) => this.setState({ isLoading: false }));
-  };
+    this.getData(parent)
+      .then((data) => {
+        setData(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+  });
   this.getData = (parent) => {
     return data;
   };
 
   return (
     <div className="list-group">
-      {this.state.data.map((file) => (
+      {data.map((file) => (
         <Link
-          to={`${url}/${parent}`}
+          to={`${url}/${file.data.name}`}
           className="list-group-item list-group-item-action"
           key={file.data.name}
         >
@@ -403,7 +406,7 @@ function FileTable() {
       ))}
     </div>
   );
-}
+};
 
 const User = (props) => {
   let username = props.username;
@@ -465,7 +468,7 @@ class App extends Component {
               <Route exact strict path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/Music" component={LogIn} />
-              <Route path="/parent/:parent" component={FileTable}  />
+              <Route path="/parent/:parent" component={FileTable} />
               <Route component={Error} />
             </Switch>
           </div>
