@@ -50,8 +50,7 @@ const FileTable = () => {
     ).json();
     return res.data;
   };
-
-  useEffect(() => {
+  useEffect(async() => {
     setIsLoading(true);
     let d = await getData(parent)
     console.log(d)
