@@ -5,8 +5,9 @@ import {
   Link,
   NavLink,
   Switch,
-  Redirect} from "react-router-dom",
- import {useRouteMatch, useParams } from "react-router";
+  Redirect} from "react-router-dom";
+
+import {useRouteMatch, useParams } from "react-router";
 
 import faunadb from "faunadb";
 let q = faunadb.query;
@@ -390,11 +391,11 @@ function FileTable() {
   };
 
   return (
-    <div class="list-group">
+    <div className="list-group">
       {this.state.data.map((file) => (
         <Link
           to={`${url}/${parent}`}
-          class="list-group-item list-group-item-action"
+          className="list-group-item list-group-item-action"
           key={file.data.name}
         >
           {file.data.name}
