@@ -14,12 +14,12 @@ import faunadb from "faunadb";
 let q = faunadb.query;
 
 let api_url = "https://cloud-drive.vercel.app/api/";
-async function postData(url) {
-  // Default options are marked with *
-  const response = await fetch(url, {
-    method: "GET", // *GET, POST, PUT, DELETE, etc
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
 }
 
 const Error = () => <h1> It is Not Found</h1>;
@@ -31,16 +31,10 @@ const FileTable = () => {
   let path = params.get("path");
 
   useEffect(() => {
-    postData(
+    let res = JSON.parse(httpGet(
       `https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/${path}`
-    )
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch(function (res) {
-        alert(`Path is ${path}`);
-        console.log(res);
-      });
+    ))
+        setData(res.data)
   });
 
   return (
