@@ -13,7 +13,7 @@ import { useRouteMatch, useParams } from "react-router";
 import faunadb from "faunadb";
 let q = faunadb.query;
 
-const data = [
+let d = [
   {
     ref: q.Ref(q.Collection("files"), "277184386427781632"),
     ts: 1600602480406000,
@@ -371,13 +371,14 @@ const LogIn = () => <h1>Please login</h1>;
 
 const FileTable = () => {
   const [data, setData] = useState([]);
+  setData(d)
   const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams();
   let { url } = useRouteMatch();
 const getData = async (parent) => {
     return data;
   };
-
+/*
   useEffect(() => {
     setIsLoading(true);
     if (parent == "/") {
@@ -391,7 +392,7 @@ const getData = async (parent) => {
       .catch((error) => {
         setIsLoading(false);
       });
-  });
+  });*/
   
   return (
     <div className="list-group">
