@@ -14,13 +14,7 @@ import faunadb from "faunadb";
 let q = faunadb.query;
 
 let api_url = "https://cloud-drive.vercel.app/api/";
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
+let counter =0
 
 const Error = () => <h1> It is Not Found</h1>;
 const FileTable = () => {
@@ -31,10 +25,12 @@ const FileTable = () => {
   let path = params.get("path");
 
   useEffect(() => {
-    let res = JSON.parse(httpGet(
-      `https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/${path}`
-    ))
-        setData(res.data)
+    fetch("https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/Academic-Library").then((res)=>res.json()).then((r)=>{console.log(r);setData(res.data)}).catch((e)=>{console.log(e)})
+        
+        counter+=1
+        if(counter>10){
+          alert(counter)
+          }
   });
 
   return (
