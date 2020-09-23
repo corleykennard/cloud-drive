@@ -370,8 +370,8 @@ const Error = () => <h1> It is Not Found</h1>;
 const LogIn = () => <h1>Please login</h1>;
 
 const FileTable = () => {
-  const [data, setData] = useState([]);
-  setData(d)
+  const [data, setData] = useState(d);
+  
   const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams();
   let { url } = useRouteMatch();
