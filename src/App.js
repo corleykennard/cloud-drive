@@ -40,7 +40,7 @@ const FileTable = () => {
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify({ func: "getFilesInParent", arg: p }),
+      body: JSON.stringify({ func: "getFilesInParent", arg: parent }),
     })
       .then((res) => res.json())
       .then((res) => setData(res.data))
