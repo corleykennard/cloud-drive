@@ -13,7 +13,7 @@ import { useRouteMatch, useParams } from "react-router";
 import faunadb from "faunadb";
 let q = faunadb.query;
 
-let api_url = "https://cloud-drive.vercel.app/api/"
+let api_url = "https://cloud-drive.vercel.app/api/";
 
 const Home = (props) => (
   <h1>
@@ -28,20 +28,35 @@ const LogIn = () => <h1>Please login</h1>;
 
 const FileTable = () => {
   const [data, setData] = useState([]);
-  
+
   const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams();
   let { url } = useRouteMatch();
-const getData = async (parent) => {
-    return data;
+  const getData = async (parent) => {
+    let res = await (
+      await fetch(
+        "https://cloud-drive.corleykennard.vercel.app/api/database/getFileInParent",
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({ arg: "/Music" }),
+        }
+      ).catch(function (res) {
+        console.log(res);
+      })
+    ).json();
+    return res.data;
   };
-/*
+
   useEffect(() => {
     setIsLoading(true);
     if (parent == "/") {
       alert("/");
     }
-   getData(parent)
+    getData(parent)
       .then((data) => {
         setData(data);
         setIsLoading(false);
@@ -49,8 +64,8 @@ const getData = async (parent) => {
       .catch((error) => {
         setIsLoading(false);
       });
-  });*/
-  
+  });
+
   return (
     <div className="list-group">
       {data.map((file) => (
