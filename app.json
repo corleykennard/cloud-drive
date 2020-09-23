@@ -1,0 +1,12 @@
+{
+  "name": "cloud-drive",
+  "displayName": "cloud-drive",
+  "expo": {
+    "name": "cloud-drive",
+    "slug": "cloud-drive",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
