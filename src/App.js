@@ -5,8 +5,8 @@ import {
   Link,
   NavLink,
   Switch,
-  Redirect,
-  useRouteMatch, useParams } from "react-router";
+  Redirect} from "react-router-dom",
+ import {useRouteMatch, useParams } from "react-router";
 
 import faunadb from "faunadb";
 let q = faunadb.query;
