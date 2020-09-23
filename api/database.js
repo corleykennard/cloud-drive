@@ -5,11 +5,10 @@ let client = new faunadb.Client({
 });
 module.exports = async (req, res) => {
   let r = await client.query(
-    q.Call(req.body.func, req.body.arg)
+    q.Call(req.query.func, req.query.arg)
   );
-  res.setHeader('Access-Control-Allow-Credentials', true)
+  //res.setHeader('Access-Control-Allow-Credentials', true)
   res.setHeader('Access-Control-Allow-Origin', '*')
-  // another common pattern
  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
   res.setHeader(
