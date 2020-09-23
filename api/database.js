@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
   const {
     query: { func },
   } = req
+  console.log(func, req.body.arg)
   let r = await client.query(
     q.Call(q.Function(func), req.body.arg)
   );

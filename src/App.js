@@ -42,7 +42,7 @@ const FileTable = () => {
             "Content-Type": "application/json",
           },
           method: "POST",
-          body: JSON.stringify({ arg: "/Music" }),
+          body: JSON.stringify({ arg: parent }),
         }
       ).catch(function (res) {
         console.log(res);
@@ -53,9 +53,6 @@ const FileTable = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    if (parent == "/") {
-      alert("/");
-    }
     getData(parent)
       .then((data) => {
         setData(data);
