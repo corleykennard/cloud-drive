@@ -14,6 +14,27 @@ import faunadb from "faunadb";
 let q = faunadb.query;
 let counter = 0;
 let api_url = "https://cloud-drive.vercel.app/api/";
+async function postData(
+  url = "https://cloud-drive.corleykennard.vercel.app/api/database",
+  data = { func: "getFilesInParent", arg: "/Music" }
+) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
 const Error = () => <h1> It is Not Found</h1>;
 const FileTable = () => {
   const [data, setData] = useState([]);
@@ -24,46 +45,52 @@ const FileTable = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://cloud-drive.corleykennard.vercel.app/api/database/", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ func: "getFilesInParent", arg: path }),
+    postData("https://cloud-drive.corleykennard.vercel.app/api/database/", {
+      func: "getFilesInParent",
+      arg: path,
     })
-      .then((res) => {
-        res.json();
-        alert("fetch", (counter += 1));
-      })
       .then((res) => {
         setData(res.data);
         setIsLoading(false);
+        alert("fetch", (counter += 1));
       })
       .catch(function (res) {
-        alert(`Path is ${path}`)
+        alert(`Path is ${path}`);
         console.log(res);
       });
   });
 
   return (
-    <div className="list-group container-fluid w-100">
-      <a href="" className="list-group-item row">
-        <p className="col-6">name</p>
-        <p className="col-2">size</p>
-        <p className="col-2">time</p>
-      </a>
-      {data.map((file) => (
-        <Link
-          to={`${url}/${file.data.name}`}
-          className="list-group-item list-group-item-action row"
-          key={file.data.name}
-        >
-          <p className="col-6">{file.data.name}</p>
-          <p className="col-2">{file.data.size}</p>
-          <p className="col-2">{file.ts}</p>
-        </Link>
-      ))}
-    </div>
+    <table className="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">size</th>
+          <th scope="col">time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((file) => (
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              {" "}
+              <Link
+                to={`${url}/${file.data.name}`}
+                className="list-group-item list-group-item-action row"
+                key={file.data.name}
+              >
+                {file.data.name}
+              </Link>
+            </td>
+            <td>{file.data.name}</td>
+            <td>{file.data.size}</td>
+            <td>{file.ts}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
