@@ -35,14 +35,14 @@ const FileTable = () => {
   const getData = async (parent) => {
     let res = await (
       await fetch(
-        "https://cloud-drive.corleykennard.vercel.app/api/database/getFileInParent",
+        "https://cloud-drive.corleykennard.vercel.app/api/database/",
         {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           method: "POST",
-          body: JSON.stringify({ arg: parent }),
+          body: JSON.stringify({func:"getFilesInParent", arg: parent }),
         }
       ).catch(function (res) {
         console.log(res);
