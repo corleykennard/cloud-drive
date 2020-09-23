@@ -25,8 +25,7 @@ const FileTable = () => {
   let path = params.get("path");
 
   useEffect(() => {
-    fetch("https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/Academic-Library").then((res)=>res.json()).then((r)=>{console.log(r);setData(res.data)}).catch((e)=>{console.log(e)})
-        
+    fetch("https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/Academic-Library").then((res)=>res.json()).then((r)=>{console.log(r);setData(r.data)}).catch((e)=>{console.log(e)})
         counter+=1
         if(counter>10){
           alert(counter)
