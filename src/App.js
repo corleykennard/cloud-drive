@@ -32,7 +32,7 @@ const FileTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams();
   let { url } = useRouteMatch();
-  const getData = async (parent) => {
+  const getData = async (p) => {
     let res = await (
       await fetch(
         "https://cloud-drive.corleykennard.vercel.app/api/database/",
@@ -42,7 +42,7 @@ const FileTable = () => {
             "Content-Type": "application/json",
           },
           method: "POST",
-          body: JSON.stringify({func:"getFilesInParent", arg: parent }),
+          body: JSON.stringify({func:"getFilesInParent", arg: p })
         }
       ).catch(function (res) {
         console.log(res);
@@ -53,14 +53,10 @@ const FileTable = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getData(parent)
-      .then((data) => {
-        setData(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    let d = await getData(parent)
+    console.log(d)
+    setData(data);
+    setIsLoading(false);
   });
 
   return (
