@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
+useRouteMatch,
+useParams,
   Route,
   Link,
   NavLink,
@@ -379,6 +381,9 @@ class FileTable extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
+    if(this.props.parent == '/'){
+      alert("/")
+      }
 
     this.getData(this.props.parent)
       .then((data) => this.setState({ data: data, isLoading: false }))
@@ -389,12 +394,14 @@ class FileTable extends React.Component {
   }
 
   render() {
+    let {parent} = useParams();
+    let {url} = useRouteMatch();
     return (
-      <ul>
+      <div class="list-group">
         {this.state.data.map((file) => (
-          <li key={file.data.name}>{file.data.name}</li>
+          <Link to={`${url}/${parent}`} class="list-group-item list-group-item-action" key={file.data.name}>{file.data.name}</Link>
         ))}
-      </ul>
+      </div>
     );
   }
 }
@@ -453,7 +460,7 @@ class App extends Component {
                 exact
                 path="/"
                 render={() => {
-                  return <Home location="Helsinki" country="Finland" />;
+                  return <Redirect to="/parent" />;
                 }}
               />
               <Route exact strict path="/about" component={About} />
