@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
-useRouteMatch,
-useParams,
   Route,
   Link,
   NavLink,
@@ -10,6 +8,8 @@ useParams,
   Redirect,
   Prompt,
 } from "react-router-dom";
+import {useRouteMatch,
+useParams} from "react-router";
 
 import faunadb from "faunadb";
 let q = faunadb.query;
