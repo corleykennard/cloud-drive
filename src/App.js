@@ -377,6 +377,8 @@ class FileTable extends React.Component {
       data: [],
       isLoading: false,
     };
+    let {parent} = useParams();
+    let {url} = useRouteMatch();
   }
 
   componentDidMount() {
@@ -394,8 +396,6 @@ class FileTable extends React.Component {
   }
 
   render() {
-    let {parent} = useParams();
-    let {url} = useRouteMatch();
     return (
       <div class="list-group">
         {this.state.data.map((file) => (
