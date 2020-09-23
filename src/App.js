@@ -57,7 +57,7 @@ postData().then(data => {    console.log(data); })
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify({ func: "getFilesInParent", arg: "./ }),
+      body: JSON.stringify({ func: "getFilesInParent", arg: "/Music"}),
     })
       .then((res) => res.json())
       .then((res) => setData(res.data))
