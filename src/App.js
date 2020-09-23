@@ -28,7 +28,6 @@ const LogIn = () => <h1>Please login</h1>;
 
 const FileTable = () => {
   const [data, setData] = useState([]);
-postData().then(data => {    console.log(data); })
   const [isLoading, setIsLoading] = useState(false);
   let { parent } = useParams()
   let { url } = useRouteMatch();
