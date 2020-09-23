@@ -13,7 +13,6 @@ import { useRouteMatch, useParams } from "react-router";
 import faunadb from "faunadb";
 let q = faunadb.query;
 
-let counter = 0;
 let api_url = "https://cloud-drive.vercel.app/api/";
 async function postData(url) {
   // Default options are marked with *
@@ -26,20 +25,17 @@ async function postData(url) {
 const Error = () => <h1> It is Not Found</h1>;
 const FileTable = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+//  const [isLoading, setIsLoading] = useState(false);
   let { url } = useRouteMatch();
   let params = new URLSearchParams(document.location.search.substring(1));
   let path = params.get("path");
 
   useEffect(() => {
-    setIsLoading(true);
     postData(
       `https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/${path}`
     )
       .then((res) => {
         setData(res.data);
-        setIsLoading(false);
-        alert("fetch", (counter += 1));
       })
       .catch(function (res) {
         alert(`Path is ${path}`);
