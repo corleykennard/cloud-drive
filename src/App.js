@@ -48,7 +48,7 @@ const FileTable = () => {
     <div className="list-group container-fluid w-100">
       <a href="" className="list-group-item row">
         //input
-        <p className="col-6">name</h6>
+        <p className="col-6">name</p>
         <p className="col-2">size</p>
         <p className="col-2">time</p>
       </a>
