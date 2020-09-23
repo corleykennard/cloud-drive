@@ -40,6 +40,7 @@ const FileTable = () => {
         setIsLoading(false);
       })
       .catch(function (res) {
+        alert(`Path is ${path}`)
         console.log(res);
       });
   });
@@ -47,7 +48,6 @@ const FileTable = () => {
   return (
     <div className="list-group container-fluid w-100">
       <a href="" className="list-group-item row">
-        //input
         <p className="col-6">name</p>
         <p className="col-2">size</p>
         <p className="col-2">time</p>
@@ -58,7 +58,6 @@ const FileTable = () => {
           className="list-group-item list-group-item-action row"
           key={file.data.name}
         >
-          //input
           <p className="col-6">{file.data.name}</p>
           <p className="col-2">{file.data.size}</p>
           <p className="col-2">{file.ts}</p>
