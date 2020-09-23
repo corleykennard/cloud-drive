@@ -8,8 +8,7 @@ import {
   Redirect,
   Prompt,
 } from "react-router-dom";
-import {useRouteMatch,
-useParams} from "react-router";
+import { useRouteMatch, useParams } from "react-router";
 
 import faunadb from "faunadb";
 let q = faunadb.query;
@@ -370,40 +369,41 @@ const Contact = () => <h1>Contact</h1>;
 const Error = () => <h1> It is Not Found</h1>;
 const LogIn = () => <h1>Please login</h1>;
 
-class FileTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      isLoading: false,
-    };
-    let {parent} = useParams();
-    let {url} = useRouteMatch();
-  }
+function FileTable() {
+  this.state = {
+    data: [],
+    isLoading: false,
+  };
+  let { parent } = useParams();
+  let { url } = useRouteMatch();
 
-  componentDidMount() {
+  this.componentDidMount = function () {
     this.setState({ isLoading: true });
-    if(this.props.parent == '/'){
-      alert("/")
-      }
+    if (this.props.parent == "/") {
+      alert("/");
+    }
 
     this.getData(this.props.parent)
       .then((data) => this.setState({ data: data, isLoading: false }))
       .catch((error) => this.setState({ isLoading: false }));
-  }
-  async getData(parent) {
+  };
+  this.getData = (parent) => {
     return data;
-  }
+  };
 
-  render() {
-    return (
-      <div class="list-group">
-        {this.state.data.map((file) => (
-          <Link to={`${url}/${parent}`} class="list-group-item list-group-item-action" key={file.data.name}>{file.data.name}</Link>
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div class="list-group">
+      {this.state.data.map((file) => (
+        <Link
+          to={`${url}/${parent}`}
+          class="list-group-item list-group-item-action"
+          key={file.data.name}
+        >
+          {file.data.name}
+        </Link>
+      ))}
+    </div>
+  );
 }
 
 const User = (props) => {
