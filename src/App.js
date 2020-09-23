@@ -29,8 +29,9 @@ const LogIn = () => <h1>Please login</h1>;
 const FileTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  let { parent } = useParams()
-  let { url } = useRouteMatch();
+let {url } = useRouteMatch();
+  let params = new URLSearchParams(document.location.search.substring(1));
+  let path = params.get("path")
 
   useEffect(() => {
     setIsLoading(true)
@@ -39,7 +40,7 @@ const FileTable = () => {
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify({ func: "getFilesInParent", arg: "/"+parent}),
+      body: JSON.stringify({ func: "getFilesInParent", arg: path}),
     })
       .then((res) => res.json())
       .then((res) => {setData(res.data); setIsLoading(false)})
@@ -49,21 +50,23 @@ const FileTable = () => {
   });
 
   return (
-    <div className="list-group w-100">
-    <a href="#" className="list-group-item d-flex flex-row justify-content-between">
-      <h6 class="mb-1">name</h6>
-            <small>size</small>
-            <small>time</small>
+    <div className="list-group container-fluid w-100">
+    <a href="#" className="list-group-item row">
+      <input type="checkbox" className="col-2 form-control form-control-lg custom-control-input">
+      <h6 className="col-6">name</h6>
+            <small className="col-2">size</small>
+            <small className="col-2">time</small>
 </a>
       {data.map((file) => (
         <Link
           to={`${url}/${file.data.name}`}
-          className="list-group-item list-group-item-action list-group-item d-flex flex-row justify-content-between"
+          className="list-group-item list-group-item-action row"
           key={file.data.name}
         >
-            <h6 class="mb-1">{file.data.name}</h6>
-            <small>{file.data.size}</small>
-            <small>{file.ts}</small>
+              <input type="checkbox" className="col-2 form-control form-control-lg custom-control-input">
+            <h6 class="col-6">{file.data.name}</h6>
+            <small className="col-2">{file.data.size}</small>
+            <small className="col-2">{file.ts}</small>
         </Link>
       ))}
     </div>
@@ -130,7 +133,7 @@ class App extends Component {
               <Route exact strict path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/Music" component={LogIn} />
-              <Route path="/parent/:parent" component={FileTable} />
+              <Route path="/list" component={FileTable} />
               <Route component={Error} />
             </Switch>
           </div>
