@@ -14,7 +14,7 @@ import { query as q } from "faunadb";
 
 let api_url = "https://cloud-drive.vercel.app/api";
 let counter = 0;
-const fileSizeToShortString(fileSize){
+const fileSizeToShortString = (fileSize)=>{
   if(fileSize<2**10){
     return `${fileSize} B`
     }
