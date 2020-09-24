@@ -26,7 +26,7 @@ const fileSizeToShortString = (fileSize) => {
 };
 
 const tsToString = (ts) => {
-  const diff = Date.now() - Math.floor(ts/1e3)
+  const diff = Date.now() - Math.floor(ts/1e6)
   if (diff < 1e3 * 60) {
     return `${Math.floor(diff / 1e3)}s ago`;
   }
