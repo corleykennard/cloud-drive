@@ -75,7 +75,6 @@ const FileTableRow = (props) => {
           </Link>
         </td>
         <td className="uk-text-nowrap"></td>
-        <td className="uk-text-nowrap">{tsToString(file.ts)}</td>
       </tr>
     );
   } else {
@@ -104,7 +103,6 @@ const FileTableRow = (props) => {
         <td className="uk-text-nowrap">
           {fileSizeToShortString(file.data.size)}
         </td>
-        <td className="uk-text-nowrap">{tsToString(file.ts)}</td>
       </tr>
     );
   }
@@ -149,7 +147,7 @@ const FileTable = () => {
             <th className="uk-table-shrink">Images</th>
             <th className="uk-table-expand">Name</th>
             <th className="uk-table-shrink">Size</th>
-            <th className="uk-table-shrink">Time</th>
+            
           </tr>
         </thead>
         <tbody>
