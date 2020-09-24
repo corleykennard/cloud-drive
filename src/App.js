@@ -18,35 +18,46 @@ let counter = 0;
 const Error = () => <h1> It is Not Found</h1>;
 const FileTableRow = (props) => {
   const { file, url } = props;
-  return (
-    <tr>
-      <th scope="row">1</th>
-      <td>
-        <Link
-          to={
-            file.data.type == "folder"
-              ? `${url}/${file.data.name}`
-              : `https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash}`
-          }
-          key={file.data.name}
-        >
-          {file.data.name}
-        </Link>
-      </td>
-      {file.data.type == "folder" ? <td></td> : <td>{file.data.size}</td>}
-      <td>{file.ts}</td>
-    </tr>
-  );
+  if (file.data.type == "folder") {
+    return (
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <Link to={url} key={file.data.name}>
+            {file.data.name}
+          </Link>
+        </td>
+        <td></td>
+        <td>{file.ts}</td>
+      </tr>
+    );
+  } else {
+    return (
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <a
+            href={`https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash} key={file.data.name}`}
+          >
+            {file.data.name}
+          </a>
+        </td>
+        <td>{file.data.size}</td>
+        <td>{file.ts}</td>
+      </tr>
+    );
+  }
 };
+
 const FileTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { url, path } = useRouteMatch();
-  let {parent} = useParams();
-  
-  if(path=="/list/"){
-    parent=""
-    }
+  let { parent } = useParams();
+
+  if (path == "/list/") {
+    parent = "";
+  }
   /*
   let params = new URLSearchParams(document.location.search.substring(1));
   let path = params.get("path");
@@ -125,8 +136,8 @@ class App extends Component {
                   return <Redirect to="/list/" />;
                 }}
               />
-              <Route exact path="/list/root/" component={FileTable} />
-              <Route path="/list/root/:parent*" component={FileTable} />
+              <Route exact path="/list/" component={FileTable} />
+              <Route path="/list/:parent*" component={FileTable} />
               <Route component={Error} />
             </Switch>
           </div>
