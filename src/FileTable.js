@@ -76,7 +76,7 @@ const FileTableRow = (props) => {
           </Link>
         </td>
         <td className="uk-text-nowrap"></td>
-        <td className="uk-text-truncate">{tsToString(file.ts)}</td>
+        <td className="uk-text-nowrap">{tsToString(file.ts)}</td>
       </tr>
     );
   } else {
@@ -88,7 +88,7 @@ const FileTableRow = (props) => {
         <td>
           <img
             className="uk-preserve-width"
-            src="https://img.icons8.com/fluent/344/folder-invoices.png"
+            src="https://img.icons8.com/color/344/file.png"
             width="40"
             alt=""
           />
@@ -105,7 +105,7 @@ const FileTableRow = (props) => {
         <td className="uk-text-nowrap">
           {fileSizeToShortString(file.data.size)}
         </td>
-        <td className="uk-text-truncate">{tsToString(file.ts)}</td>
+        <td className="uk-text-nowrap">{tsToString(file.ts)}</td>
       </tr>
     );
   }
