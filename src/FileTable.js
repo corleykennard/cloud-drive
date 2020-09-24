@@ -27,26 +27,26 @@ const fileSizeToShortString = (fileSize) => {
 
 const tsToString = (ts) => {
   const diff = Date.now() - ts;
-  if (diff < 1e3 * 60) {
-    return `${Math.floor(diff / 1e3)}s ago`;
+  if (diff < 1e6 * 60) {
+    return `${Math.floor(diff / 1e6)}s ago`;
   }
-  if (diff < 1e3 * 60 * 60) {
-    return `${Math.floor((diff / 1e3) * 60)}m ago`;
+  if (diff < 1e6 * 60 * 60) {
+    return `${Math.floor((diff / 1e6) * 60)}m ago`;
   }
-  if (diff < 1e3 * 60 * 60 * 24) {
-    return `${Math.floor((diff / 1e3) * 60 * 60)}h ago`;
+  if (diff < 1e6 * 60 * 60 * 24) {
+    return `${Math.floor((diff / 1e6) * 60 * 60)}h ago`;
   }
-  if (diff < 1e3 * 60 * 60 * 24 * 7) {
-    return `${Math.floor((diff / 1e3) * 60 * 60 * 24)}d ago`;
+  if (diff < 1e6 * 60 * 60 * 24 * 7) {
+    return `${Math.floor((diff / 1e6) * 60 * 60 * 24)}d ago`;
   }
 
-  if (diff < 1e3 * 60 * 60 * 24 * 30) {
-    return `${Math.floor((diff / 1e3) * 60 * 60 * 24 * 7)}w ago`;
+  if (diff < 1e6 * 60 * 60 * 24 * 30) {
+    return `${Math.floor((diff / 1e6) * 60 * 60 * 24 * 7)}w ago`;
   }
-  if (diff < 1e3 * 60 * 60 * 24 * 365) {
-    return `${Math.floor((diff / 1e3) * 60 * 60 * 24 * 30)}mth ago`;
+  if (diff < 1e6 * 60 * 60 * 24 * 365) {
+    return `${Math.floor((diff / 1e6) * 60 * 60 * 24 * 30)}mth ago`;
   } else {
-    return `${Math.floor((diff / 1e3) * 60 * 60 * 24 * 365)}y ago`;
+    return `${Math.floor((diff / 1e6) * 60 * 60 * 24 * 365)}y ago`;
   }
 };
 
