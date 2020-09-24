@@ -27,6 +27,7 @@ const fileSizeToShortString = (fileSize) => {
   return `${Math.floor(fileSize / 2 ** 30)} GB`;
 };
 const Error = () => <h1> It is Not Found</h1>;
+
 const FileTableRow = (props) => {
   const { file, url } = props;
   if (file.data.type == "folder") {
@@ -34,9 +35,19 @@ const FileTableRow = (props) => {
       <tr>
         <th scope="row">1</th>
         <td>
-          <Link to={`${url}/${file.data.name}`} key={file.data.name}>
-            {file.data.name}
-          </Link>
+          <div className="custom-control custom-checkbox checkbox-xl">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id={file.data.name}
+              checked=""
+            />
+            <label className="custom-control-label" for={file.data.name}>
+              <Link to={`${url}/${file.data.name}`} key={file.data.name}>
+                {file.data.name}
+              </Link>
+            </label>
+          </div>
         </td>
         <td></td>
         <td>{file.ts}</td>
@@ -47,12 +58,22 @@ const FileTableRow = (props) => {
       <tr>
         <th scope="row">1</th>
         <td>
-          <a
-            href={`https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash}`}
-            key={file.data.name}
-          >
-            {file.data.name}
-          </a>
+          <div className="custom-control custom-checkbox checkbox-xl">
+            <input
+              type="checkbox"
+              className="custom-control-input"
+              id={file.data.name}
+              checked=""
+            />
+            <label className="custom-control-label" for={file.data.name}>
+              <a
+                href={`https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash}`}
+                key={file.data.name}
+              >
+                {file.data.name}
+              </a>
+            </label>{" "}
+          </div>
         </td>
         <td>{fileSizeToShortString(file.data.size)}</td>
         <td>{file.ts}</td>
@@ -90,7 +111,7 @@ const FileTable = () => {
     if (counter > 10) {
       alert(counter);
     }
-  }, []);
+  }, [parent]);
 
   return (
     <table className="table">
