@@ -14,7 +14,18 @@ import { query as q } from "faunadb";
 
 let api_url = "https://cloud-drive.vercel.app/api";
 let counter = 0;
-
+const fileSizeToShortString(fileSize){
+  if(fileSize<2**10){
+    return `${fileSize} B`
+    }
+      if(fileSize<2**20){
+        return `${Math.floor(fileSize/2**10)} KB`
+        }
+        if(fileSize<2**30){
+        return `${Math.floor(fileSize/2**20)} MB`
+        }
+        return `${Math.floor(fileSize/2**30)} GB`
+  }
 const Error = () => <h1> It is Not Found</h1>;
 const FileTableRow = (props) => {
   const { file, url } = props;
@@ -23,7 +34,7 @@ const FileTableRow = (props) => {
       <tr>
         <th scope="row">1</th>
         <td>
-          <Link to={url} key={file.data.name}>
+          <Link to={`${url}/${file.data.name}} key={file.data.name}>
             {file.data.name}
           </Link>
         </td>
@@ -37,12 +48,13 @@ const FileTableRow = (props) => {
         <th scope="row">1</th>
         <td>
           <a
-            href={`https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash} key={file.data.name}`}
+            href={`https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash}`}
+            key={file.data.name}
           >
             {file.data.name}
           </a>
         </td>
-        <td>{file.data.size}</td>
+        <td>{fileSizeToShortString(file.data.size)}</td>
         <td>{file.ts}</td>
       </tr>
     );
