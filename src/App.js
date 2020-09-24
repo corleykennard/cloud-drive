@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import { useRouteMatch, useParams } from "react-router";
-import FileTable from "./FileTable.js";
+import FileTable from "./FileTable";
 import { query as q } from "faunadb";
 
 let api_url = "https://cloud-drive.vercel.app/api";
