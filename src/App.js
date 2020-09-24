@@ -17,7 +17,7 @@ let counter = 0;
 
 const Error = () => <h1> It is Not Found</h1>;
 const FileTableRow = (props) => {
-  const { file } = props;
+  const { file, url } = props;
   return (
     <tr>
       <th scope="row">1</th>
@@ -77,7 +77,7 @@ const FileTable = () => {
       </thead>
       <tbody>
         {data.map((file) => (
-          <FileTableRow file={file} />
+          <FileTableRow url={url} file={file} />
         ))}
       </tbody>
     </table>
