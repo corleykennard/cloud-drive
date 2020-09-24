@@ -12,9 +12,6 @@ import { useRouteMatch, useParams } from "react-router";
 import FileTable from "./FileTable";
 import { query as q } from "faunadb";
 
-let api_url = "https://cloud-drive.vercel.app/api";
-let counter = 0;
-
 const Error = () => <h1> It is Not Found</h1>;
 
 const Navbar = (props) => {
