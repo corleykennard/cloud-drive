@@ -41,15 +41,19 @@ const FileTableRow = (props) => {
 const FileTable = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { url } = useRouteMatch();
-  const { path } = useParams();
+  const { url, path } = useRouteMatch();
+  let {parent} = useParams();
+  
+  if(path=="/list/"){
+    parent=""
+    }
   /*
   let params = new URLSearchParams(document.location.search.substring(1));
   let path = params.get("path");
 */
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${api_url}/database?func=getFilesInParent&arg=/${path}`)
+    fetch(`${api_url}/database?func=getFilesInParent&arg=/${parent}`)
       .then((res) => res.json())
       .then((r) => {
         console.log(r);
@@ -121,8 +125,8 @@ class App extends Component {
                   return <Redirect to="/list/" />;
                 }}
               />
-              <Route exact path="/list/" component={FileTable} />
-              <Route path="/list/path*" component={FileTable} />
+              <Route exact path="/list/root/" component={FileTable} />
+              <Route path="/list/root/:parent*" component={FileTable} />
               <Route component={Error} />
             </Switch>
           </div>
