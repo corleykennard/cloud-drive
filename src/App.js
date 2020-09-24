@@ -10,27 +10,60 @@ import {
 
 import { useRouteMatch, useParams } from "react-router";
 
-import faunadb from "faunadb";
-let q = faunadb.query;
+import { query as q } from "faunadb";
 
-let api_url = "https://cloud-drive.vercel.app/api/";
-let counter =0
+let api_url = "https://cloud-drive.vercel.app/api";
+let counter = 0;
 
 const Error = () => <h1> It is Not Found</h1>;
+const FileTableRow = (props) => {
+  const { file } = props;
+  return (
+    <tr>
+      <th scope="row">1</th>
+      <td>
+        <Link
+          to={
+            file.data.type == "folder"
+              ? `${url}/${file.data.name}`
+              : `https://cloudflare-ipfs.com/ipfs/${file.data.ipfsHash}`
+          }
+          key={file.data.name}
+        >
+          {file.data.name}
+        </Link>
+      </td>
+      {file.data.type == "folder" ? <td></td> : <td>{file.data.size}</td>}
+      <td>{file.ts}</td>
+    </tr>
+  );
+};
 const FileTable = () => {
   const [data, setData] = useState([]);
-//  const [isLoading, setIsLoading] = useState(false);
-  let { url } = useRouteMatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const { url } = useRouteMatch();
+  const { path } = useParams();
+  /*
   let params = new URLSearchParams(document.location.search.substring(1));
   let path = params.get("path");
-
+*/
   useEffect(() => {
-    fetch("https://cloud-drive.corleykennard.vercel.app/api/database?func=getFilesInParent&arg=/Academic-Library").then((res)=>res.json()).then((r)=>{console.log(r);setData(r.data)}).catch((e)=>{console.log(e)})
-        counter+=1
-        if(counter>10){
-          alert(counter)
-          }
-  }, [])
+    setIsLoading(true);
+    fetch(`${api_url}/database?func=getFilesInParent&arg=/${path}`)
+      .then((res) => res.json())
+      .then((r) => {
+        console.log(r);
+        setData(r.data);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    counter += 1;
+    if (counter > 10) {
+      alert(counter);
+    }
+  }, []);
 
   return (
     <table className="table">
@@ -44,20 +77,7 @@ const FileTable = () => {
       </thead>
       <tbody>
         {data.map((file) => (
-          <tr>
-            <th scope="row">1</th>
-            <td>
-              <Link
-                to={`${url}/${file.data.name}`}
-                key={file.data.name}
-              >
-                {file.data.name}
-              </Link>
-            </td>
-            <td>{file.data.name}</td>
-            <td>{file.data.size}</td>
-            <td>{file.ts}</td>
-          </tr>
+          <FileTableRow file={file} />
         ))}
       </tbody>
     </table>
@@ -67,7 +87,9 @@ const FileTable = () => {
 const Navbar = (props) => {
   return (
     <nav className="navbar navbar-light bg-light justify-content-between">
-      <a className="navbar-brand">Navbar</a>
+      <a href="/" className="navbar-brand">
+        Navbar
+      </a>
       <form className="form-inline">
         <input
           className="form-control mr-sm-2"
@@ -96,10 +118,11 @@ class App extends Component {
                 exact
                 path="/"
                 render={() => {
-                  return <Redirect to="/list?path=/" />;
+                  return <Redirect to="/list/" />;
                 }}
               />
-              <Route path="/list" component={FileTable} />
+              <Route exact path="/list/" component={FileTable} />
+              <Route path="/list/path*" component={FileTable} />
               <Route component={Error} />
             </Switch>
           </div>
