@@ -1,3 +1,43 @@
+
+<script>
+   import { onMount } from 'svelte';
+   import {location} from 'svelte-spa-router'
+   export let params = {}
+   let count = 0;
+ $:  if(params.wild==null){
+   params.wild=""
+   }
+  const fetchData = async (parent) =>{
+  let res =await fetch(`${api_url}/database?func=getFilesInParent&arg=/${parent}`)      .catch((e) => {
+           alert(e)
+         });
+         res =await res.json()
+         count+=1
+         if(count>9){
+         alert(count)
+         }
+   	data= res.data
+       	}
+      let api_url = "https://cloud-drive.vercel.app/api";
+      let data =[]
+$: fetchData(params.wild)
+       
+const fileSizeToShortString = (fileSize) => {
+     if (fileSize < 2 ** 10) {
+       return `${fileSize} B`;
+     }
+     if (fileSize < 2 ** 20) {
+       return `${Math.floor(fileSize / 2 ** 10)} KB`;
+     }
+     if (fileSize < 2 ** 30) {
+       return `${Math.floor(fileSize / 2 ** 20)} MB`;
+     }
+     return `${Math.floor(fileSize / 2 ** 30)} GB`;
+   };
+   
+</script>
+
+
 <div class="uk-overflow-auto">
    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
       <thead>
@@ -68,40 +108,3 @@
       </tbody>
    </table>
 </div>
-<script>
-   import { onMount } from 'svelte';
-   import {location} from 'svelte-spa-router'
-   export let params = {}
-   let count = 0;
- $:  if(params.wild==null){
-   params.wild=""
-   }
-  const fetchData = async (parent) =>{
-  let res =await fetch(`${api_url}/database?func=getFilesInParent&arg=/${parent}`)      .catch((e) => {
-           alert(e)
-         });
-         res =await res.json()
-         count+=1
-         if(count>9){
-         alert(count)
-         }
-   	data= res.data
-       	}
-      let data = []
-      let api_url = "https://cloud-drive.vercel.app/api";
-$:  fetchData(params.wild)
-       
-const fileSizeToShortString = (fileSize) => {
-     if (fileSize < 2 ** 10) {
-       return `${fileSize} B`;
-     }
-     if (fileSize < 2 ** 20) {
-       return `${Math.floor(fileSize / 2 ** 10)} KB`;
-     }
-     if (fileSize < 2 ** 30) {
-       return `${Math.floor(fileSize / 2 ** 20)} MB`;
-     }
-     return `${Math.floor(fileSize / 2 ** 30)} GB`;
-   };
-   
-</script>
