@@ -41,7 +41,7 @@ const response = await fetch("https://cloud-drive.vercel.app/api/database", {
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify({a:8}) // body data type must match "Content-Type" header
-  });
+  }).catch((e)=>{alert(e)})
   console.log(await response.json()) // parses JSON response into native JavaScript objects
 }
 </script>
