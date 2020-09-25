@@ -35,12 +35,22 @@
             </td>
             <td class="uk-table-link">
             {#if file.data.type=='folder'}
-               <a
+            
+            {#if file.data.parent == "/"}
+            <a
                   class="uk-link-reset"
-                  href="#{$location+'/' + file.data.name}"
+                  href="#{$location+ file.data.name}"
                   >
                   {file.data.name}
                </a>
+            {:else}
+               <a
+                  class="uk-link-reset"
+                  href="#{$location+'/'+ file.data.name}"
+                  >
+                  {file.data.name}
+               </a>
+               {/if}
             {:else}
             <a
                   class="uk-link-reset"
@@ -63,9 +73,11 @@
    import {location} from 'svelte-spa-router'
    export let params = {}
    let count = 0;
+ $:  if(params.wild==null){
+   params.wild=""
+   }
   const fetchData = async (parent) =>{
-  
-       	let res = await fetch(`${api_url}/database?func=getFilesInParent&arg=/${parent}`)      .catch((e) => {
+  let res =await fetch(`${api_url}/database?func=getFilesInParent&arg=/${parent}`)      .catch((e) => {
            alert("error")
          });
          res =await res.json()
