@@ -5,7 +5,7 @@
     <div class="uk-navbar-item">
             <form action="javascript:void(0)">
                 <input class="uk-input uk-form-width-small" type="text" placeholder="Input">
-                <button class="uk-button uk-button-default">Button</button>
+                <button class="uk-button uk-button-default" on:click={handler}>Button</button>
             </form>
         </div>
 </nav>
@@ -43,6 +43,5 @@ const response = await fetch("https://cloud-drive.vercel.app/api/database", {
     body: JSON.stringify({a:8}) // body data type must match "Content-Type" header
   });
   console.log(await response.json()) // parses JSON response into native JavaScript objects
-}
 }
 </script>
