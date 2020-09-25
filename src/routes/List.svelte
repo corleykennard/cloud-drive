@@ -78,7 +78,7 @@
    }
   const fetchData = async (parent) =>{
   let res =await fetch(`${api_url}/database?func=getFilesInParent&arg=/${parent}`)      .catch((e) => {
-           alert("error")
+           alert(e)
          });
          res =await res.json()
          count+=1
