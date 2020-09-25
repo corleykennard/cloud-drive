@@ -1,4 +1,5 @@
-
+import faunadb = from 'faunadb';
+  let q = faunadb.query
 <script>
    import { onMount } from 'svelte';
    import {location} from 'svelte-spa-router'
@@ -16,7 +17,9 @@
          if(count>9){
          alert(count)
          }
+         
    	data= res.data
+   
        	}
       let api_url = "https://cloud-drive.vercel.app/api";
       let data =[]
