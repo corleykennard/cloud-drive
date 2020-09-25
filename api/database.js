@@ -11,9 +11,18 @@ module.exports = async (req, res) => {
     'Access-Control-Allow-Headers',
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   )
-  let r = await client.query(
+  let r = {};
+  if(req.body != undefined){
+    res.status(200).json(req.body)
+    }
+  if(req.query != undefined){
+    if(req.query.func != undefined){
+     r = await client.query(
     q.Call(req.query.func, req.query.arg)
   );
+  }}
+  
+  
   //res.setHeader('Access-Control-Allow-Credentials', true)
   
   res.status(200).json(r);
