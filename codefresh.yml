@@ -37,4 +37,4 @@ steps:
     image: ${{build_prod_image}}
     working_directory: '/root'
     commands:
-      - ls -a && ls -a / && npm run deploy
+      - pwd && ls -a && ls -a / && npm run deploy

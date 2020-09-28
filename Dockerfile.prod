@@ -1,7 +1,7 @@
 FROM node:lts-alpine3.9
 
 WORKDIR /root
-COPY --from=corleykennard/cloud-drive:dev /root/public .
+COPY --from=corleykennard/cloud-drive:dev /root/public/* .
 COPY --from=corleykennard/cloud-drive:dev /root/package.json .
 RUN npm i -g sirv-cli
 EXPOSE 5000
