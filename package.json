@@ -8,8 +8,11 @@
     "test": "ava",
     "deploy": "echo 'no need to'"
   },
-  "dependencies":{
-  "faunadb": "latest"
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.12.1",
+    "auth0-js": "^9.14.0",
+    "faunadb": "latest",
+    "postinstall": "^0.7.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "latest",
@@ -22,5 +25,5 @@
     "svelte": "latest",
     "sirv-cli": "latest",
     "ava": "latest"
-}
+  }
 }
