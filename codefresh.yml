@@ -21,7 +21,7 @@ steps:
     image: ${{build_dev_image}}
     working_directory: '.'
     commands:
-      - npm run build && npm run test
+      - npm run test
   build_prod_image:
     title: 'Building My Production Image'
     type: build
@@ -32,7 +32,7 @@ steps:
       condition:
         all:
           executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
-   deploy_my_app:
+  deploy_my_app:
     title: Deploy my app
     image: ${{build_prod_image}}
     working_directory: '.'
