@@ -12,9 +12,7 @@ let auth0 = "",
     domain: "nhlong.auth0.com",
     client_id: "DL3NAj77A2fplyYSs9e9JXqiVxZUHvbx",
     cacheLocation: "localstorage",
-  });
-  alert(1)
-  alert(await auth0.isAuthenticated())
+  })
   if (!(await auth0.isAuthenticated())) {
     await auth0.loginWithPopup();
     user = await auth0.getUser();
@@ -22,8 +20,6 @@ let auth0 = "",
     alert(accessToken);
   }
 })();
-
-
 import Router from 'svelte-spa-router'
 import routes from './routes'
 import Nav from './Nav.svelte'
