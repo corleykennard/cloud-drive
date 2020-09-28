@@ -1,5 +1,4 @@
 FROM node:lts-alpine3.9
-
 WORKDIR /app
 COPY --from=corleykennard/cloud-drive:dev /app/public ./public
 COPY --from=corleykennard/cloud-drive:dev /app/package.json .
