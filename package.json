@@ -20,7 +20,6 @@
     "svelte-spa-router": "latest",
     "svelte": "latest",
     "sirv-cli": "latest",
-    "ava": "latest",
-    "npx": "latest"
+    "ava": "latest"
 }
 }
