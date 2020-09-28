@@ -21,4 +21,20 @@ steps:
     image: ${{build_dev_image}}
     working_directory: '.'
     commands:
-      - npm run test
+      - npm run build && npm run test
+  build_prod_image:
+    title: 'Building My Production Image'
+    type: build
+    dockerfile: Dockerfile.prod
+    image_name: 'corleykennard/${{CF_REPO_NAME}}'
+    tag: prod
+    when:
+      condition:
+        all:
+          executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
+   deploy_my_app:
+    title: Deploy my app
+    image: ${{build_prod_image}}
+    working_directory: '.'
+    commands:
+      - npm run deploy

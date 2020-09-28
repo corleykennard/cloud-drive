@@ -1,0 +1,7 @@
+FROM node:lts-alpine3.9
+
+COPY --from=corleykennard/cloud-drive:dev public public
+
+RUN ls -a && ls -a public
+
+CMD ["echo", "hi"]
