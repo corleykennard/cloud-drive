@@ -1,0 +1,4 @@
+FROM node:lts-alpine3.9
+COPY . .
+RUN npm install --also=dev
+CMD ["echo", "hi"]
