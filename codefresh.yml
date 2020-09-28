@@ -5,7 +5,7 @@ steps:
     type: git-clone
     repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
     revision: '${{CF_REVISION}}'
-    git: github-1
+    git: github
   build_dev_image:
     title: 'Building My Development Image'
     type: build
@@ -13,9 +13,9 @@ steps:
     image_name: ${{CF_REPO_NAME}}
     tag: dev
     when:
-    condition:
-      all:
-        executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
+      condition:
+        all:
+          executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
   run_my_tests_inside_image:
     title: Running Unit tests inside App image
     image: ${{build_dev_image}}
