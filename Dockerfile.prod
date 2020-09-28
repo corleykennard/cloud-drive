@@ -1,8 +1,7 @@
 FROM node:lts-alpine3.9
 
-COPY --from=corleykennard/cloud-drive:dev public public
-
-RUN ls -a && ls -a public && echo $HOME
-RUN npm i -g sirv-cli
+WORKDIR /root
+COPY --from=corleykennard/cloud-drive:dev /root/public .
+RUN npm i -g sirv-cli && ls -a && pwd
 EXPOSE 5000
 ENTRYPOINT ["sirv", "public"]

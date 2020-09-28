@@ -1,4 +1,5 @@
 FROM node:lts-alpine3.9
+WORKDIR /root
 COPY . .
 RUN npm install --also=dev && npm i -g ava && npm run build
 CMD ["echo", "hi"]
