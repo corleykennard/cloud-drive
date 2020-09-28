@@ -19,9 +19,9 @@ steps:
   run_my_tests_inside_image:
     title: Running Unit tests inside App image
     image: ${{build_dev_image}}
-    working_directory: '.'
+    working_directory: '/root'
     commands:
-      - npm run test
+      - ls -a && npm run test
   build_prod_image:
     title: 'Building My Production Image'
     type: build
@@ -35,6 +35,6 @@ steps:
   deploy_my_app:
     title: Deploy my app
     image: ${{build_prod_image}}
-    working_directory: '.'
+    working_directory: '/root'
     commands:
       - npm run deploy
