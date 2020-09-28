@@ -1,5 +1,7 @@
 FROM node:lts-alpine3.9
 WORKDIR /app
 COPY . .
-RUN npm install --also=dev && npm i -g ava && npm run build
+RUN npm i -g ava
+RUN npm i --also=dev
+RUN npm run build
 CMD ["echo", "I have successfully built the app for you"]
