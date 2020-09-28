@@ -1,4 +1,4 @@
 FROM node:lts-alpine3.9
 COPY . .
-RUN npm install --also=dev
+RUN npm install --also=dev && npm i -g npx
 CMD ["echo", "hi"]

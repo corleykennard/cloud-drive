@@ -5,10 +5,10 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "test": "ava"
+    "test": "npx ava"
   },
-  "dependencies": {
-    "faunadb": "latest"
+  "dependencies":{
+  "faunadb": "latest"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "latest",
@@ -20,6 +20,7 @@
     "svelte-spa-router": "latest",
     "svelte": "latest",
     "sirv-cli": "latest",
-    "ava": "latest"
-  }
+    "ava": "latest",
+    "npx": "latest"
+}
 }
