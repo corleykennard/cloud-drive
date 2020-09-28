@@ -21,7 +21,7 @@ steps:
     image: ${{build_dev_image}}
     working_directory: '/root'
     commands:
-      - ls -a && npm run test
+      - npm run test
   build_prod_image:
     title: 'Building My Production Image'
     type: build
@@ -37,4 +37,4 @@ steps:
     image: ${{build_prod_image}}
     working_directory: '/root'
     commands:
-      - npm run deploy
+      - ls -a && ls -a / && npm run deploy
