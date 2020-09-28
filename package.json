@@ -19,6 +19,7 @@
     "rollup-plugin-terser": "latest",
     "svelte-spa-router": "latest",
     "svelte": "latest",
-    "sirv-cli": "latest"
+    "sirv-cli": "latest",
+    "ava": "latest"
 }
 }
